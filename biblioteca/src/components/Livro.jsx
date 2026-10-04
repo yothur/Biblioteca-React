@@ -24,7 +24,6 @@ const Livro = () => {
         
         setTitulo("");
         setAutor("");
-        setCategoria("");
         setAno("");
 
         setTimeout(() => {
@@ -58,7 +57,15 @@ const Livro = () => {
         <input value={autor} onChange={handleTrocarAutor} type="text" name="autor" id="autor" placeholder="Digite o autor: "/>
 
         <label htmlFor="categoria">Categoria</label>
-        <input value={categoria} onChange={handleTrocarCategoria} type="text" name="categoria" id="categoria" placeholder="Digite a categoria: "/>
+        <select name="categoria" id="categoria" value={categoria} onChange={handleTrocarCategoria}>
+            <option value={""}>Selecione uma categoria</option>
+            <option value={"Ficção"}>Ficção</option>
+            <option value={"Aventura"}>Aventura</option>
+            <option value={"Romance"}>Romance</option>
+            <option value={"Manga"}>Manga</option>
+            <option value={"Manhwa"}>Manhwa</option>
+            <option value={"Terror"}>Terror</option>
+        </select>
 
         <label htmlFor="ano">Ano</label>
         <input value={ano} onChange={handleTrocarAno} type="text" name="ano" id="ano" placeholder="Digite o ano: "/>

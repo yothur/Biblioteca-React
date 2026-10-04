@@ -3,8 +3,13 @@ import {useState} from "react";
 const LivroCard = () => {
 
     const [buscar, setBusca] = useState("")
+    const [buscarCategoria, setBuscarCtegoria] = useState("")
     const handleBuscar = (e) => {
         setBusca(e.target.value)
+    }
+
+    const handleCategoria = (e) => {
+        setBuscarCtegoria(e.target.value)
     }
 
     const [livros] = useState(JSON.parse(localStorage.getItem("livros")) || []);
@@ -12,6 +17,9 @@ const LivroCard = () => {
     const livrosFiltrados = livros.filter((livros) => (livros.autor.toLowerCase().includes(buscar.toLowerCase()) ||
         livros.titulo.toLowerCase().includes(buscar.toLowerCase())
     ));
+
+    const livrosFiltradosCategorias = livros.filter((livros) => (livros.categoria.includes(buscarCategoria)));
+
 
     return <div>
         <label htmlFor="pesquisar">Pesquisar: </label>
@@ -27,8 +35,31 @@ const LivroCard = () => {
             <div key={index}>
                 <h2>{livro.titulo}</h2>
                 <p>Autor: {livro.autor}</p>
+                <p>Categoria: {livro.categoria}</p>
             </div>
         ))}
+        <select name="buscarCategoeria" 
+        id="buscarCategoria" 
+        value={buscarCategoria}
+        onChange={handleCategoria}
+        >
+        <option value={""}>Selecione uma categoria</option>
+        <option value={"Ficção"}>Ficção</option>
+        <option value={"Aventura"}>Aventura</option>
+        <option value={"Romance"}>Romance</option>
+        <option value={"Manga"}>Manga</option>
+        <option value={"Manhwa"}>Manhwa</option>
+        <option value={"Terror"}>Terror</option>
+        </select>
+
+        {livrosFiltradosCategorias.map((livro, index) => (
+            <div key={index}>
+                <h2>{livro.titulo}</h2>
+                <p>Autor: {livro.autor}</p>
+                <p>Categoria: {livro.categoria}</p>
+            </div>
+        ))}
+
     </div>
 }
 
