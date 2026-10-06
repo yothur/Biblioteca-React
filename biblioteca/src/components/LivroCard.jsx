@@ -3,14 +3,14 @@ import {useState} from "react";
 const LivroCard = () => {
 
     const [buscar, setBusca] = useState("")
-    const [buscarCategoria, setBuscarCtegoria] = useState("")
+    const [buscarCategoria, setBuscarCategoria] = useState("")
 
     const handleBuscar = (e) => {
         setBusca(e.target.value)
     }
 
     const handleCategoria = (e) => {
-        setBuscarCtegoria(e.target.value)
+        setBuscarCategoria(e.target.value)
     }
 
 
@@ -66,6 +66,17 @@ const LivroCard = () => {
                 <h2>{livro.titulo}</h2>
                 <p>Autor: {livro.autor}</p>
                 <p>Categoria: {livro.categoria}</p>
+                <p> Status: {livro.emprestado ? "Emprestado" : "Disponível"}</p>
+
+                {livro.emprestado ? (
+                    <button type="button" onClick={() => handleDevolver(livro.id)}>
+                        Devolver
+                    </button>
+                ) : (
+                    <button type="button" onClick={() => handleEmprestar(livro.id)}>
+                        Emprestar
+                    </button>
+                )}
             </div>
         ))}
         <select name="buscarCategoeria" 
@@ -87,6 +98,17 @@ const LivroCard = () => {
                 <h2>{livro.titulo}</h2>
                 <p>Autor: {livro.autor}</p>
                 <p>Categoria: {livro.categoria}</p>
+                <p> Status: {livro.emprestado ? "Emprestado" : "Disponível"}</p>
+
+                {livro.emprestado ? (
+                    <button type="button" onClick={() => handleDevolver(livro.id)}>
+                        Devolver
+                    </button>
+                ) : (
+                    <button type="button" onClick={() => handleEmprestar(livro.id)}>
+                        Emprestar
+                    </button>
+                )}
             </div>    
         ))}
 
