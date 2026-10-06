@@ -4,6 +4,7 @@ const LivroCard = () => {
 
     const [buscar, setBusca] = useState("")
     const [buscarCategoria, setBuscarCtegoria] = useState("")
+
     const handleBuscar = (e) => {
         setBusca(e.target.value)
     }
@@ -12,14 +13,43 @@ const LivroCard = () => {
         setBuscarCtegoria(e.target.value)
     }
 
-    const [livros] = useState(JSON.parse(localStorage.getItem("livros")) || []);
+
+    const [livros, setLivros] = useState(JSON.parse(localStorage.getItem("livros")) || []);
+
+    const handleEmprestar = (id) => {
+        const livrosAtualizados = [];
+        for (let i = 0; i < livros.length; i++) {
+            if (livros[i].id === id) {
+                livros[i].emprestado = true;
+            }
+            livrosAtualizados.push(livros[i]);
+        }
+        localStorage.setItem(
+            "livros", JSON.stringify(livros)
+                );
+                setLivros(livrosAtualizados);
+            };
+
+    const handleDevolver = (id) => {
+        const livrosAtualizados = []
+        for (let i = 0; i < livros.length; i++) {
+            if (livros[i].id === id) {
+                livros[i].emprestado = false;
+            }
+            livrosAtualizados.push(livros[i]);
+        }
+        localStorage.setItem(
+            "livros", JSON.stringify(livros)
+                );
+                setLivros(livrosAtualizados);
+            };
+
 
     const livrosFiltrados = livros.filter((livros) => (livros.autor.toLowerCase().includes(buscar.toLowerCase()) ||
         livros.titulo.toLowerCase().includes(buscar.toLowerCase())
     ));
 
     const livrosFiltradosCategorias = livros.filter((livros) => (livros.categoria.includes(buscarCategoria)));
-
 
     return <div>
         <label htmlFor="pesquisar">Pesquisar: </label>
@@ -57,7 +87,7 @@ const LivroCard = () => {
                 <h2>{livro.titulo}</h2>
                 <p>Autor: {livro.autor}</p>
                 <p>Categoria: {livro.categoria}</p>
-            </div>
+            </div>    
         ))}
 
     </div>

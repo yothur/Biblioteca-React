@@ -5,18 +5,29 @@ const Livro = () => {
     const [autor, setAutor] = useState("");
     const [categoria, setCategoria] = useState("");
     const [ano, setAno] = useState("");
-    const [mensagem, setMensagem] = useState("")
+    const [mensagem, setMensagem] = useState("");
 
     const handleSalvar = (e) => {
-        e.preventDefault();
+
+        const livrosSalvos = JSON.parse(localStorage.getItem("livros")) || [];
+
+        let novoId = 1;
+
+        for (let i=0; i < livrosSalvos.length; i++) {
+            if (livrosSalvos[i].id >= novoId) {
+                novoId = livrosSalvos[i].id + 1
+            }
+        }
+
         const novoLivro = {
+            id : novoId,
             titulo : titulo,
             autor : autor,
             categoria : categoria,
-            ano : ano
+            ano : ano,
+            emprestado : false
         };
 
-        const livrosSalvos = JSON.parse(localStorage.getItem("livros")) || [];
         livrosSalvos.push(novoLivro)
         localStorage.setItem("livros", JSON.stringify(livrosSalvos))
         
