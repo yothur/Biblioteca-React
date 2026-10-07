@@ -7,7 +7,24 @@ const Livro = () => {
     const [ano, setAno] = useState("");
     const [mensagem, setMensagem] = useState("");
 
+
+    const validarLivro = (novoLivro) => {
+        const livrosSalvos = JSON.parse(localStorage.getItem("livros")) || [];
+
+        for (let i = 0; i < livrosSalvos.length; i++) {
+            if (livrosSalvos[i].titulo === novoLivro.titulo &&
+                livrosSalvos[i].autor === novoLivro.autor &&
+                livrosSalvos[i].categoria === novoLivro.categoria &&
+                livrosSalvos[i].ano === novoLivro.ano
+            ){
+                return false
+            }
+        }
+        return true
+    }
+
     const handleSalvar = (e) => {
+        e.preventDefault()
 
         const livrosSalvos = JSON.parse(localStorage.getItem("livros")) || [];
 
@@ -19,7 +36,8 @@ const Livro = () => {
             }
         }
 
-        const novoLivro = {
+        if (titulo.length > 0 && autor.length > 0 && categoria !== "" && ano >= 1455 && ano <= 2026){
+            const novoLivro = {
             id : novoId,
             titulo : titulo,
             autor : autor,
@@ -27,20 +45,35 @@ const Livro = () => {
             ano : ano,
             emprestado : false
         };
+            if (validarLivro(novoLivro)){
+                livrosSalvos.push(novoLivro)
+                localStorage.setItem("livros", JSON.stringify(livrosSalvos))
 
-        livrosSalvos.push(novoLivro)
-        localStorage.setItem("livros", JSON.stringify(livrosSalvos))
+                setMensagem("Livro cadastrado com sucesso");
 
-        setMensagem("Livro cadastrado com sucesso");
+                setTitulo("");
+                setAutor("");
+                setAno("");
 
-        setTitulo("");
-        setAutor("");
-        setAno("");
+                setTimeout(() => {
+                    setMensagem("")
 
-        setTimeout(() => {
-            setMensagem("")
+                }, 2000);
+            }else {
+                setMensagem("Livro Existente!")
+                setTimeout(() => {
+                    setMensagem("")
 
-        }, 2000);
+                }, 2000);
+            }
+        }else {
+            setMensagem("Preencha todos os campos e verifique as informações")
+            setTimeout(() => {
+                setMensagem("")
+
+            }, 2000);
+        }
+
     }
 
 
