@@ -30,9 +30,9 @@ const Livro = () => {
 
         livrosSalvos.push(novoLivro)
         localStorage.setItem("livros", JSON.stringify(livrosSalvos))
-        
+
         setMensagem("Livro cadastrado com sucesso");
-        
+
         setTitulo("");
         setAutor("");
         setAno("");
@@ -41,13 +41,13 @@ const Livro = () => {
             setMensagem("")
 
         }, 2000);
-    } 
+    }
 
 
     const handleTrocarTitulo = (e) => {
         setTitulo(e.target.value);
     }
-    
+
     const handleTrocarAutor = (e) => {
         setAutor(e.target.value)
     }
@@ -59,8 +59,8 @@ const Livro = () => {
     const handleTrocarAno = (e) => {
         setAno(e.target.value)
     }
-    
-    return <form onSubmit={handleSalvar}>
+
+    return <form className="formulario" onSubmit={handleSalvar}>
         <label htmlFor="titulo">Titulo</label>
         <input value={titulo} onChange={handleTrocarTitulo} type="text" name="titulo" id="titulo" placeholder="Digite o titulo: "/>
 
@@ -84,9 +84,9 @@ const Livro = () => {
         <button type="submit">
             Cadastrar livro
         </button>
-        {mensagem && <p>{mensagem}</p>}
+        {mensagem && <p className="mensagem">{mensagem}</p>}
     </form>
-    
+
 }
 
 export default Livro

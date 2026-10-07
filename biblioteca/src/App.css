@@ -1,0 +1,252 @@
+:root {
+    --marrom-escuro: #4a3228;
+    --marrom: #6f4e37;
+    --terracota: #b5603a;
+    --terracota-escura: #8f4a2b;
+    --areia: #e8d9c5;
+    --creme: #fffaf3;
+    --verde-oliva: #6b7f3a;
+    --tijolo: #a8442f;
+    --texto-suave: #7a6558;
+    --vidro: rgba(255, 250, 243, 0.82);
+    --sombra: 0 4px 12px rgba(74, 50, 40, 0.15);
+    --sombra-forte: 0 12px 28px rgba(74, 50, 40, 0.28);
+}
+
+.app {
+    position: relative;
+    z-index: 0;
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+.app::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+        linear-gradient(rgba(74, 50, 40, 0.45), rgba(74, 50, 40, 0.25)),
+        url('/fundo.jpg') center / cover no-repeat,
+        linear-gradient(135deg, #c9a27a, #8f6b4a 50%, #5c4033);
+    filter: blur(6px);
+    transform: scale(1.05);
+}
+
+.header {
+    background: rgba(222, 196, 163, 0.9);
+    backdrop-filter: blur(10px);
+    color: var(--marrom-escuro);
+    padding: 20px 40px;
+    box-shadow: var(--sombra-forte);
+    border-bottom: 3px solid #b58863;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu button {
+    padding: 9px 18px;
+    border-radius: 20px;
+    background-color: transparent;
+    color: var(--marrom-escuro);
+}
+
+.menu button:hover {
+    background-color: rgba(74, 50, 40, 0.12);
+}
+
+.menu .botao-cadastrar {
+    background-color: var(--terracota);
+    color: white;
+}
+
+.menu .botao-cadastrar:hover {
+    background-color: var(--terracota-escura);
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    animation: aparecer 0.5s ease;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.formulario {
+    background-color: var(--vidro);
+    backdrop-filter: blur(12px);
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 35px;
+    border-radius: 16px;
+    border-top: 6px solid var(--terracota);
+    box-shadow: var(--sombra-forte);
+    animation: aparecer 0.5s ease;
+}
+
+.formulario label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: var(--marrom);
+}
+
+.formulario label:first-child {
+    margin-top: 0;
+}
+
+.formulario input,
+.formulario select {
+    width: 100%;
+}
+
+.formulario button {
+    width: 100%;
+    margin-top: 25px;
+    background-color: var(--terracota);
+    color: white;
+}
+
+.mensagem {
+    margin-top: 15px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background-color: #e4ebd0;
+    color: var(--verde-oliva);
+    font-weight: 600;
+}
+
+.filtro-categoria {
+    margin: 25px 0;
+    padding: 16px 20px;
+    background-color: var(--vidro);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: var(--sombra);
+}
+
+.filtro-categoria label {
+    font-weight: 600;
+    margin-right: 8px;
+    color: var(--marrom);
+}
+
+.filtro-categoria input,
+.filtro-categoria select {
+    min-width: 250px;
+}
+
+.livros {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.livro-card {
+    background-color: var(--vidro);
+    backdrop-filter: blur(10px);
+    padding: 22px;
+    border-radius: 16px;
+    border-top: 6px solid var(--terracota);
+    box-shadow: var(--sombra);
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.livro-card:hover {
+    transform: translateY(-6px) rotate(-0.5deg);
+    box-shadow: var(--sombra-forte);
+}
+
+.livro-card h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 21px;
+    margin-bottom: 12px;
+    color: var(--marrom-escuro);
+}
+
+.livro-card p {
+    margin-bottom: 8px;
+    color: var(--texto-suave);
+}
+
+.livro-card .status {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.livro-card .status-disponivel {
+    background-color: #e4ebd0;
+    color: var(--verde-oliva);
+}
+
+.livro-card .status-emprestado {
+    background-color: #f3d9d2;
+    color: var(--tijolo);
+}
+
+.botao-emprestar,
+.botao-devolver {
+    display: block;
+    width: 100%;
+    margin-top: 14px;
+    color: white;
+}
+
+.botao-emprestar {
+    background-color: var(--verde-oliva);
+}
+
+.botao-devolver {
+    background-color: var(--tijolo);
+}
+
+@media (max-width: 600px) {
+    .header {
+        padding: 15px;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .container {
+        width: 95%;
+    }
+
+    .formulario {
+        margin: 20px 10px;
+        padding: 25px;
+    }
+    
+    .filtro-categoria input,
+    .filtro-categoria select {
+        width: 100%;
+        min-width: 0;
+    }
+}
