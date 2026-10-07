@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3ebe0;
+    color: #3e2c23;
+}
+
+button {
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: transform 0.15s, filter 0.15s;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.08);
+}
+
+input,
+select {
+    padding: 10px;
+    border: 1px solid #cdb9a5;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: #fffaf3;
+    color: #3e2c23;
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: #a0522d;
+    box-shadow: 0 0 0 3px rgba(160, 82, 45, 0.2);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}

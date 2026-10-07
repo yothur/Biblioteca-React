@@ -1,15 +1,23 @@
 import './App.css'
+import { useState } from 'react'
 import Livro from './components/Livro'
 import LivroCard from "./components/LivroCard.jsx";
-import {useState} from "react";
 
 function App() {
+  const [pagina, setPagina] = useState("livros")
+
   return (
-    <>
-      <Livro></Livro>
-        <br/>
-        <LivroCard></LivroCard>
-    </>
+    <div className="app">
+      <header className="header">
+        <h1>Biblioteca</h1>
+        <nav className="menu">
+          <button type="button" onClick={() => setPagina("livros")}>Livros</button>
+          <button type="button" className="botao-cadastrar" onClick={() => setPagina("cadastro")}>Cadastrar livro</button>
+        </nav>
+      </header>
+
+      {pagina === "livros" ? <LivroCard /> : <Livro />}
+    </div>
   )
 }
 
